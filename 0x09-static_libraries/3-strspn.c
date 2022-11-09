@@ -1,33 +1,35 @@
 #include "main.h"
-
 /**
- * _strspn - gets the length of a preix substring
- * @s: string to evaluate
- * @accept: string containing the list of characters to match in s
- * Return:  the number of bytes in the initial segment of
- * s which consist only of bytes from accept
- */
+* _strspn - return length of string that matches values consistently
+* @s: string to search
+* @accept: target matches
+* Return: number of bytes consecutively matched
+*/
+
 unsigned int _strspn(char *s, char *accept)
 {
-	unsigned int i = 0;
-	int j;
+	int i = 0, j;
+	int matches = 0;
 
-
-	while (*s)
+	while (s[i] != '\0') /*iterate through string*/
 	{
-		for (j = 0; accept[j]; j++)
+
+		for (j = 0; accept[j] != '\0'; j++) /*iterate through target*/
 		{
-			if (accept[j] == *s)
+			if (s[i] == accept[j]) /*record & break at first match*/
 			{
-				i++;
+				matches++;
 				break;
 			}
 
-			else if ((accept[j + 1]) == '\0')
-				return (i);
+			if (accept[j + 1] == '\0' && s[i] != accept[j])
+
+			return (matches);/*return if idx doesn't match*/
 		}
-		s++;
+
+		i++;
 	}
 
-	return (i);
+	return (matches); /* return num if all match till end */
+
 }
